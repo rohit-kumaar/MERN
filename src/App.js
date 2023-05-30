@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import axios from "axios";
 
 function App() {
   const API = `http://localhost:8080/api`;
@@ -20,25 +21,20 @@ function App() {
     e.preventDefault();
     console.log(form);
 
-    const response = await fetch(API, {
-      method: "POST",
-      body: JSON.stringify(form),
-      headers: {
-        "Content-Type": "application/json",
-      },
+    axios.post(API, form).then((res) => {
+      setForm(res.data);
     });
-
-    const data = await response.json();
-    console.log(data);
   };
 
-  const getUsers = async () => {
-    const response = await fetch(API, {
-      method: "GET",
-    });
-
-    const data = await response.json();
-    setUsers(data);
+  const getUsers = () => {
+    axios
+      .get(API)
+      .then((res) => {
+        setUsers(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
