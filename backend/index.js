@@ -1,16 +1,11 @@
 const express = require("express");
 const morgan = require("morgan");
-const mongoose = require("mongoose");
 const app = express();
 const productRouter = require("./routes/product");
 const userRouter = require("./routes/user");
+const databaseConnection = require("./config/db");
 
-// DATABASE CONNECTION
-main().catch((err) => console.log(err));
-async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/ecommerce");
-  console.log("database connected");
-}
+databaseConnection();
 
 app.use(express.json());
 app.use(morgan("default"));
