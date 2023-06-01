@@ -3,7 +3,7 @@ import "./App.css";
 import axios from "axios";
 
 function App() {
-  const API = `http://localhost:8080/api`;
+  const API = `http://localhost:8080/products`;
 
   const [form, setForm] = useState({
     username: "",
